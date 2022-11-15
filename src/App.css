@@ -1,38 +1,61 @@
-.App {
+body{
+  /*background-color: rgb(51, 51, 51);*/
+  background: #242438;
+  height: 95vh;
+}
+
+.footer {
+  /*position: absolute;
+  bottom: 0;
+  width:100%;
+  height: 50px;
+  background-color: black;
   text-align: center;
+  color: white;*/
+  position: absolute;
+width: 100%;
+bottom: 0;
+height: 100px;
+background: #3C3C74;
+
+border-top: 5px solid #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.logo-3-4{
+  height: 145px;
+  margin-left: 75px;
+  margin-top: 40px;
+  object-fit: cover;
+  width: 134px;
+  float: left;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header-div{
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.wallet-selection{
+  display: inline-block;
+  vertical-align: middle;
+  float: right;
+  margin-top: 60px;
+  margin-right: 75px;
 }
 
-.App-link {
-  color: #61dafb;
+
+.discord{
+  position: absolute;
+  left: 51.67%;
+  right: 45.47%;
+  top: 22%;
+  bottom: 2.13%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.twitter{
+  position: absolute;
+  left: 45.94%;
+  right: 51.2%;
+  top: 22%;
+  bottom: 2.13%;
 }
+

@@ -1,23 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import Header from "./Components/Header"
+import Footer from "./Components/Footer"
+import React, { useEffect } from 'react'
+
 
 function App() {
+  const [userStakeKey, setStakeKey] = React.useState()
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header setStakeKey={setStakeKey}></Header>
+      {userStakeKey != null ? <h1>{userStakeKey}</h1> : <h1>connect your wallet</h1>}
+      <Footer></Footer>
     </div>
   );
 }
