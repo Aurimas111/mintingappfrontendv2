@@ -30,10 +30,6 @@ border-top: 5px solid #000000;
   float: left;
 }
 
-.header-div{
-
-}
-
 .wallet-selection{
   display: inline-block;
   vertical-align: middle;
@@ -59,3 +55,107 @@ border-top: 5px solid #000000;
   bottom: 2.13%;
 }
 
+.slideris{
+  margin-top: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 444px;
+  margin-top: 135px;
+  position: relative;
+  width: 720px;
+}
+.slider-container{
+  display: flex;
+
+}
+
+.slider-itself{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.box{
+  position: relative;
+  width: auto;
+}
+
+.frame-1{
+  border-radius: 25px;
+  align-self: center;
+  position: static;
+  width: 714px;
+  height: 438px;
+  left: 603px;
+  top: 323px;
+  
+  background: #837d7d;
+  border: 3px solid #000000;
+  }
+
+  .rectangle-2{
+    border-radius: 25px;
+    position: absolute;
+  width: 639px;
+  height: 55px;
+  left: 38px;
+  top: 22px;
+  
+  background: #272727;
+  border: 3px solid #000000;
+  }
+
+  .supported-wallets{
+    position: absolute;
+  width: 595px;
+  height: 30px;
+  left: 80px;
+  top: 15px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  
+  color: #FFFFFF;
+  }
+
+  .information-1{
+    position: absolute;
+    width: 418px;
+    height: 54px;
+    left: 59px;
+    top: 123px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    
+    color: #FFFFFF;
+  }
+  
+  .information-2{
+    position: absolute;
+  width: 633px;
+  height: 98px;
+  left: 59px;
+  top: 177px;
+  
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 24px;
+  
+  color: #FFFFFF;
+  }
