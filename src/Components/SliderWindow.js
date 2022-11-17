@@ -14,7 +14,7 @@ export default function SliderWindow() {
     return (
 
         <div className="slider-container">
-          <div className='slideris' style={{ marginTop: "250px", marginBottom: "130px" }}>
+          <div className='slideris' style={{ marginTop: "130px", marginBottom: "130px" }}>
               <div className='frame-1'>
                 <div className='rectangle-2'>
                   <div className='supported-wallets'>

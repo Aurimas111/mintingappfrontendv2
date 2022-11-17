@@ -12,14 +12,15 @@ body{
   background-color: black;
   text-align: center;
   color: white;*/
-  position: absolute;
+  position: relative;
 width: 100%;
 bottom: 0;
-height: 100px;
+height: 110px;
 background: #3C3C74;
 
 border-top: 5px solid #000000;
 }
+
 
 .logo-3-4{
   height: 145px;
@@ -27,47 +28,44 @@ border-top: 5px solid #000000;
   margin-top: 40px;
   object-fit: cover;
   width: 134px;
-  float: left;
+
+
 }
 
 .wallet-selection{
-  display: inline-block;
-  vertical-align: middle;
-  float: right;
   margin-top: 60px;
   margin-right: 75px;
+  position:absolute;
+  top:0;
+  right:0;
+
 }
 
 
 .discord{
   position: absolute;
-  left: 51.67%;
-  right: 45.47%;
+  left: 52.5%;
   top: 22%;
   bottom: 2.13%;
 }
 
 .twitter{
   position: absolute;
-  left: 45.94%;
-  right: 51.2%;
+  left: 47.5%;
   top: 22%;
   bottom: 2.13%;
 }
 
 .slideris{
-  margin-top: 200px;
   display: block;
   margin-left: auto;
   margin-right: auto;
   height: 444px;
-  margin-top: 135px;
   position: relative;
-  width: 720px;
+  width: 700px;
 }
 .slider-container{
   display: flex;
-
 }
 
 .slider-itself{
@@ -93,16 +91,14 @@ border-top: 5px solid #000000;
   position: static;
   width: 714px;
   height: 438px;
-  left: 603px;
-  top: 323px;
   
   background: #837d7d;
   border: 3px solid #000000;
   }
 
   .rectangle-2{
-    border-radius: 25px;
-    position: absolute;
+  border-radius: 25px;
+  position: absolute;
   width: 639px;
   height: 55px;
   left: 38px;
@@ -113,7 +109,7 @@ border-top: 5px solid #000000;
   }
 
   .supported-wallets{
-    position: absolute;
+  position: absolute;
   width: 595px;
   height: 30px;
   left: 80px;
@@ -159,3 +155,46 @@ border-top: 5px solid #000000;
   
   color: #FFFFFF;
   }
+
+  .connect-wallet{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+
+  }
+
+  .connect-wallet-frame{
+    border-radius: 25px;
+
+    width: 400px;
+    height: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
+    background: #837d7d;
+    border: 3px solid #000000;
+  }
+
+  .connect-wallet-information{
+    position: absolute;
+    width: 400px;
+    height: 54px;
+    left: 59px;
+    top: 50px;
+    
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    align-self: center;
+    
+    color: #FFFFFF;
+  }
+
+  .connect-wallet-container{
+    display: flex;
+  }
+  
