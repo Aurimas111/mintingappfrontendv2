@@ -6,6 +6,7 @@ import React, { useEffect } from 'react'
 import SliderWindow from './Components/SliderWindow';
 import ConnectWallet from './Components/ConnectWallet';
 import PaymentWindow from './Components/PaymentWindow';
+import NotWhitelisted from './Components/NotWhitelisted';
 import { PulseLoader } from 'halogenium';
 
 
@@ -32,7 +33,7 @@ function App() {
       timerStart = {timerStart}
       //isLoadingAmountToSend= {isLoadingAmountToSend}
       setIsLoadingAmountToSend = {setIsLoadingAmountToSend}
-      ></SliderWindow> : ""}
+      ></SliderWindow> : <NotWhitelisted></NotWhitelisted>}
 
       {isLoadingAmountToSend ? (<div className='loader'>
             <PulseLoader color="#fff" size="16px" margin="4px" /></div>
