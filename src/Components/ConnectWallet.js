@@ -7,13 +7,12 @@ export default function ConnectWallet() {
 
         <div className="connect-wallet-container">
           <div className='connect-wallet' style={{ marginTop: "150px", marginBottom: "263px" }}>
-              <div className='connect-wallet-frame'>
                   <div className='connect-wallet-information'>
                     <span>Please connect your wallet to continue.</span>
                   </div>
 
               </div>
-            </div>
+
             </div>
             
 
