@@ -16,7 +16,6 @@ export default function TxSubmittedWindow(props){
                 <div className='information-submitted-2'>
                 <span> Waiting for your transaction to go through...</span> 
                 </div>
-
                 </div>
 
             </div>

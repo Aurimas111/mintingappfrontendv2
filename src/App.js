@@ -8,6 +8,8 @@ import PaymentWindow from './Components/PaymentWindow';
 import NotWhitelisted from './Components/NotWhitelisted';
 import { PulseLoader } from 'halogenium';
 import TxSubmittedWindow from './Components/TxSubmittedWindow';
+import SoldOutWindow from './Components/SoldOutWindow'
+import AmountService from './services/AmountService';
 
 
 function App() {
@@ -21,15 +23,30 @@ function App() {
   const [enabledWallet, setEnabledWallet ] = React.useState(undefined)
   const [txSubmitted, setTxSubmitted] = React.useState(false)
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
+  const [isSoldOut, setIsSoldOut] = React.useState(true)
 
+/*
+    function saveAmount(amount){
+      AmountService.createAmount(amount).then(res =>{
+        props.setAmountToSend(res.data['amountToSend']);
+      });
+
+*/
+
+  React.useEffect(() =>{
+    AmountService.getSoldOutProgress().then(res =>{
+      setIsSoldOut(res.data);
+    })
+  }, [])
 
   return (
     <div className="App">
       <Header setStakeKey={setStakeKey} setEnabledWallet={setEnabledWallet}></Header>
 
-      {userStakeKey === null && amountToSend === 0 ? <ConnectWallet></ConnectWallet> : ""}
+      {isSoldOut && amountReserved === 0 ? <SoldOutWindow></SoldOutWindow> : ""}
+      {userStakeKey === null && amountToSend === 0 && !isSoldOut ? <ConnectWallet></ConnectWallet> : ""}
       
-      {amountToSend === 0 && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow setAmountToSend = {setAmountToSend}
+      {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow setAmountToSend = {setAmountToSend}
       setAmountReserved = {setAmountReserved}
       setEndOfReservationTime = {setEndOfReservationTime}
       setTimerTo = {setTimerTo}
@@ -38,13 +55,13 @@ function App() {
       setIsLoadingAmountToSend = {setIsLoadingAmountToSend}
       ></SliderWindow> : ""}
 
-      {amountToSend != 0 && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? "" : <NotWhitelisted></NotWhitelisted>}
+      {amountToSend === 0 && !isSoldOut && userStakeKey !== "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <NotWhitelisted></NotWhitelisted> : ""}
 
-      {isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? (<div className='loader'>
+      {isLoadingAmountToSend && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? (<div className='loader'>
             <PulseLoader color="#fff" size="16px" margin="4px" /></div>
       ) : ("")}
 
-      {amountToSend !== 0 && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" && !txSubmitted ? <PaymentWindow
+      {amountToSend !== 0 && !isSoldOut && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" && !txSubmitted ? <PaymentWindow
       amountToSend= {amountToSend}
       endOfReservationTime={endOfReservationTime}
       timerTo={timerTo}
@@ -55,7 +72,7 @@ function App() {
       setSubmittedTxHash={setSubmittedTxHash}
       ></PaymentWindow> : ""}
 
-      {txSubmitted && amountToSend !== 0 && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <TxSubmittedWindow
+      {txSubmitted && !isSoldOut && amountToSend !== 0 && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <TxSubmittedWindow
       submittedTxHash={submittedTxHash}
       ></TxSubmittedWindow> : ""}
 
