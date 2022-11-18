@@ -1,9 +1,10 @@
 import React from 'react'
 import Countdown from 'react-countdown';
-
+import WalletInteracting from './WalletInteracting';
 
 
 export default function PaymentWindow(props){
+
 
         return (
 
@@ -19,7 +20,6 @@ export default function PaymentWindow(props){
       <div className='information-reserved-2'>
         <span>You have </span>
         <Countdown date={Date.now() + props.timerTo}
-        //renderer = {renderer}
         renderer= {props =>
           (
           <span>
@@ -27,14 +27,16 @@ export default function PaymentWindow(props){
             {props.formatted.seconds}
           </span>
         )}
-        
-        //zeroPadTime ={3} /*onChange={this.setTimes(props)}*/
         />
         <span> left to submit the transaction.</span>
-
+        <WalletInteracting 
+        enabledWallet={props.enabledWallet}
+        amountToSend={props.amountToSend}
+        setTxSubmitted={props.setTxSubmitted}
+        setSubmittedTxHash={props.setSubmittedTxHash}
+        ></WalletInteracting>
       </div>
   </div>
-
 
       
         )

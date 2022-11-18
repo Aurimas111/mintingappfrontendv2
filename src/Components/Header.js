@@ -10,6 +10,7 @@ export default function Header(props) {
 
     React.useEffect(() =>{
         props.setStakeKey(wallet.stakeAddress)
+        props.setEnabledWallet(wallet.enabledWallet)
         //console.log(userStakeKey)
     },[useCardano()])
 
