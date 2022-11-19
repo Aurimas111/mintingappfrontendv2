@@ -6,6 +6,21 @@ import WalletInteracting from './WalletInteracting';
 export default function PaymentWindow(props){
 
 
+  function render(propss){
+    if(!propss.completed){
+      return (<><span>You have {propss.formatted.minutes}:{propss.formatted.seconds} left to submit the transaction.</span><WalletInteracting
+        enabledWallet={props.enabledWallet}
+        amountToSend={props.amountToSend}
+        setTxSubmitted={props.setTxSubmitted}
+        setSubmittedTxHash={props.setSubmittedTxHash}
+      ></WalletInteracting></>
+      )
+    }else{
+      return (<><span> Time to submit your transaction has expired.</span> <br></br><span> If you submitted your transaction before it expired, you will receive your NFTS.</span></>
+      )
+    }
+  }
+
         return (
 
         <div className='payment' style={{marginTop: "80px", marginBottom: "130px"}}>
@@ -18,26 +33,14 @@ export default function PaymentWindow(props){
 }
       </div>
       <div className='information-reserved-2'>
-        <span>You have </span>
-        <Countdown date={Date.now() + props.timerTo}
-        renderer= {props =>
-          (
-          <span>
-            {props.formatted.minutes}:
-            {props.formatted.seconds}
-          </span>
-        )}
-        />
-        <span> left to submit the transaction.</span>
-        <WalletInteracting 
-        enabledWallet={props.enabledWallet}
-        amountToSend={props.amountToSend}
-        setTxSubmitted={props.setTxSubmitted}
-        setSubmittedTxHash={props.setSubmittedTxHash}
-        ></WalletInteracting>
+        
+
+        <><Countdown date={Date.now() + props.timerTo}
+                  renderer={render}
+                  precision={2}
+                  />
+        </>
       </div>
   </div>
-
-      
         )
 }

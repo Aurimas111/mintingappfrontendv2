@@ -36,7 +36,10 @@ export default function SliderWindow(props) {
 
       var diffMs = (reservationEnd - currentTime);
 
-      props.setTimerTo(Math.round(((diffMs % 86400000) % 3600000)))
+
+      setTimeout(() => {
+        props.setTimerTo(Math.floor(((diffMs % 86400000) % 3600000)))
+      }, 2000);
 
       setTimeout(() =>{
         props.setIsLoadingAmountToSend(false)

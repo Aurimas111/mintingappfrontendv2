@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import logo from 'C:/Users/aurim/OneDrive/Desktop/MintingAppFrontend/src/images/Logo2.png';
 import { ConnectWalletList, ConnectWalletButton } from '@cardano-foundation/cardano-connect-with-wallet';
 import { useCardano } from '@cardano-foundation/cardano-connect-with-wallet';
@@ -12,7 +12,9 @@ export default function Header(props) {
         props.setStakeKey(wallet.stakeAddress)
         props.setEnabledWallet(wallet.enabledWallet)
         //console.log(userStakeKey)
-    },[useCardano()])
+    },)
+
+//    },[useCardano()])
 
         return (
             <div className='header-div'>

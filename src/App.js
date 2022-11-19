@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./Components/Header"
 import Footer from "./Components/Footer"
-import React, { useEffect } from 'react'
+import React from 'react'
 import SliderWindow from './Components/SliderWindow';
 import ConnectWallet from './Components/ConnectWallet';
 import PaymentWindow from './Components/PaymentWindow';
@@ -24,14 +24,6 @@ function App() {
   const [txSubmitted, setTxSubmitted] = React.useState(false)
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
   const [isSoldOut, setIsSoldOut] = React.useState(true)
-
-/*
-    function saveAmount(amount){
-      AmountService.createAmount(amount).then(res =>{
-        props.setAmountToSend(res.data['amountToSend']);
-      });
-
-*/
 
   React.useEffect(() =>{
     AmountService.getSoldOutProgress().then(res =>{

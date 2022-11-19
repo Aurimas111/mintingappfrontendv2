@@ -533,7 +533,7 @@ refreshData = async () => {
         var diffMs = (reservationEnd - currentTime);
 
         await setTimeout(() => {
-          this.setState({timerTo: Math.round(((diffMs % 86400000) % 3600000), console.log("timeris 2  " + this.state.timerTo))})
+          this.setState({timerTo: Math.round(((diffMs % 86400000) % 3600000), console.log("timeris 2  " + this.props.timerTo))})
         }, 2000);
         await this.setState({isLoadingTx: false});
 
