@@ -12,8 +12,8 @@ export default function SliderWindow(props) {
       setSliderValue(parseInt(event.target.value));
     };
 
-    function saveAmount(amount){
-      AmountService.createAmount(amount).then(res =>{
+    function sendOrder(amount){
+      AmountService.sendOrder(amount, props.userStakeKey).then(res =>{
         props.setAmountToSend(res.data['amountToSend']);
       });
 
@@ -24,7 +24,7 @@ export default function SliderWindow(props) {
       props.setIsLoadingAmountToSend(true)
 
       if(amount>=1 && amount <=5){
-      saveAmount(amount);
+      sendOrder(amount);
       props.setAmountReserved(amount)
 
       let reservationEnd = new Date();
@@ -64,9 +64,7 @@ export default function SliderWindow(props) {
                   <Slider
                     aria-label="Always visible"
                     defaultValue={1}
-                    //getAriaValueText={getText}
                     step={1}
-                    //marks={marks}
                     min={1}
                     max={5}
                     valueLabelDisplay="on"

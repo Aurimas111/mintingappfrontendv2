@@ -31,6 +31,11 @@ function App() {
     })
   }, [])
 
+
+  // Kai atlieka rezervacija visa svarbiau informacija issaugoti i db
+  // jei vartotojas pekrauna puslapi su walletu kuris jau buvo padejes uzsakyma ir uzsakymas dar nera apmoketas
+  // uzkrauti ta uzsakyma
+
   return (
     <div className="App">
       <Header setStakeKey={setStakeKey} setEnabledWallet={setEnabledWallet}></Header>
@@ -39,6 +44,7 @@ function App() {
       {userStakeKey === null && amountToSend === 0 && !isSoldOut ? <ConnectWallet></ConnectWallet> : ""}
       
       {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow setAmountToSend = {setAmountToSend}
+      userStakeKey = {userStakeKey}
       setAmountReserved = {setAmountReserved}
       setEndOfReservationTime = {setEndOfReservationTime}
       setTimerTo = {setTimerTo}
