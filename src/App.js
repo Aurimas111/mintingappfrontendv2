@@ -16,7 +16,7 @@ function App() {
   const [userStakeKey, setStakeKey] = React.useState()
   const [amountToSend, setAmountToSend] = React.useState(0)
   const [amountReserved, setAmountReserved] = React.useState(0)
-  const [endOfReservationTime, setEndOfReservationTime] = React.useState(new Date())
+  //const [endOfReservationTime, setEndOfReservationTime] = React.useState(0)
   const [timerTo, setTimerTo] = React.useState(undefined)
   const [timerStart, setTimerStart] = React.useState(new Date())
   const [isLoadingAmountToSend, setIsLoadingAmountToSend] = React.useState(false)
@@ -24,6 +24,9 @@ function App() {
   const [txSubmitted, setTxSubmitted] = React.useState(false)
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
   const [isSoldOut, setIsSoldOut] = React.useState(true)
+  const [activeOrder, setActiveOrder] = React.useState(false)
+
+
 
   React.useEffect(() =>{
     AmountService.getSoldOutProgress().then(res =>{
@@ -32,25 +35,33 @@ function App() {
   }, [])
 
 
-  // Kai atlieka rezervacija visa svarbiau informacija issaugoti i db
+  // Kai atlieka rezervacija visa svarbia informacija issaugoti i db
   // jei vartotojas pekrauna puslapi su walletu kuris jau buvo padejes uzsakyma ir uzsakymas dar nera apmoketas
   // uzkrauti ta uzsakyma
 
   return (
     <div className="App">
-      <Header setStakeKey={setStakeKey} setEnabledWallet={setEnabledWallet}></Header>
+      <Header setStakeKey={setStakeKey}
+      setEnabledWallet={setEnabledWallet}
+      userStakeKey={userStakeKey}
+      setAmountToSend={setAmountToSend}
+      setAmountReserved={setAmountReserved}
+      setTimerTo={setTimerTo}
+      ></Header>
 
       {isSoldOut && amountReserved === 0 ? <SoldOutWindow></SoldOutWindow> : ""}
-      {userStakeKey === null && amountToSend === 0 && !isSoldOut ? <ConnectWallet></ConnectWallet> : ""}
+      {userStakeKey === null && !isSoldOut ? <ConnectWallet></ConnectWallet> : ""}
       
       {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow setAmountToSend = {setAmountToSend}
       userStakeKey = {userStakeKey}
       setAmountReserved = {setAmountReserved}
-      setEndOfReservationTime = {setEndOfReservationTime}
+      //setEndOfReservationTime = {setEndOfReservationTime}
       setTimerTo = {setTimerTo}
       timerStart = {timerStart}
       //isLoadingAmountToSend= {isLoadingAmountToSend}
       setIsLoadingAmountToSend = {setIsLoadingAmountToSend}
+      setActiveOrder={setActiveOrder}
+      //endOfReservationTime={endOfReservationTime}
       ></SliderWindow> : ""}
 
       {amountToSend === 0 && !isSoldOut && userStakeKey !== "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <NotWhitelisted></NotWhitelisted> : ""}
@@ -61,7 +72,7 @@ function App() {
 
       {amountToSend !== 0 && !isSoldOut && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" && !txSubmitted ? <PaymentWindow
       amountToSend= {amountToSend}
-      endOfReservationTime={endOfReservationTime}
+      //endOfReservationTime={endOfReservationTime}
       timerTo={timerTo}
       timerStart={timerStart}
       amountReserved={amountReserved}

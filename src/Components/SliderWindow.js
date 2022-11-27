@@ -6,6 +6,27 @@ import AmountService from '../services/AmountService';
 
 export default function SliderWindow(props) {
     const [sliderValue, setSliderValue] = React.useState(1);
+    const [endOfReservationTime, setEndOfReservationTime] = React.useState(new Date())
+
+
+    React.useEffect(()=>{
+      AmountService.getActiveOrder(props.userStakeKey).then(res =>{
+        if(res.data['amountToSend'] !== 0){
+        props.setAmountReserved(res.data['amountReserved'])
+        props.setAmountToSend(res.data['amountToSend'])
+        //props.setTimerTo(res.data['endOfReservationTime'])
+        let d = new Date(res.data['endOfReservationTime'])
+        //setEndOfReservationTime(setDate)
+        //endOfReservationTime.setDate(res.data['endOfReservationTime'])
+
+        const currentTime = new Date(Date.now());
+        //console.log(endOfReservationTime)
+        var diffMs = (d - currentTime);
+        props.setTimerTo(Math.floor(((diffMs % 86400000) % 3600000)))
+        }
+
+      });
+    },[])
 
 
     const changeValue = (event, value) => {
@@ -30,9 +51,9 @@ export default function SliderWindow(props) {
       let reservationEnd = new Date();
       const timerSta = new Date(props.timerStart);
       const currentTime = new Date(Date.now());
-      reservationEnd.setMinutes (timerSta.getMinutes() + 1);
+      reservationEnd.setMinutes (timerSta.getMinutes() + 15);
 
-      props.setEndOfReservationTime(reservationEnd)
+      setEndOfReservationTime(reservationEnd)
 
       var diffMs = (reservationEnd - currentTime);
 

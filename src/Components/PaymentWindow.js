@@ -34,7 +34,6 @@ export default function PaymentWindow(props){
       </div>
       <div className='information-reserved-2'>
         
-
         <><Countdown date={Date.now() + props.timerTo}
                   renderer={render}
                   precision={2}
