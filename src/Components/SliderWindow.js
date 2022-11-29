@@ -23,6 +23,9 @@ export default function SliderWindow(props) {
         //console.log(endOfReservationTime)
         var diffMs = (d - currentTime);
         props.setTimerTo(Math.floor(((diffMs % 86400000) % 3600000)))
+        if(res.data['txSubmitted'] === true){
+          props.setAmountToSend(0)
+        }
         }
 
       });
@@ -70,7 +73,6 @@ export default function SliderWindow(props) {
     }
 
     return (
-
 
         <div className="container">
           <div className='slideris' style={{ marginTop: "102px", marginBottom: "130px" }}>

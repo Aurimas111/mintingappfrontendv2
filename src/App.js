@@ -24,7 +24,6 @@ function App() {
   const [txSubmitted, setTxSubmitted] = React.useState(false)
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
   const [isSoldOut, setIsSoldOut] = React.useState(true)
-  const [activeOrder, setActiveOrder] = React.useState(false)
 
 
 
@@ -60,7 +59,6 @@ function App() {
       timerStart = {timerStart}
       //isLoadingAmountToSend= {isLoadingAmountToSend}
       setIsLoadingAmountToSend = {setIsLoadingAmountToSend}
-      setActiveOrder={setActiveOrder}
       //endOfReservationTime={endOfReservationTime}
       ></SliderWindow> : ""}
 
