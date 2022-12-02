@@ -8,28 +8,25 @@ export default function SliderWindow(props) {
     const [sliderValue, setSliderValue] = React.useState(1);
     const [endOfReservationTime, setEndOfReservationTime] = React.useState(new Date())
 
-
-    React.useEffect(()=>{
+// kai yra uzrezervuotas paskutinis nft ir parefreshinamas puslapis, nieko nekrauna nes isSoldOut yra true
+    /*React.useEffect(()=>{
       AmountService.getActiveOrder(props.userStakeKey).then(res =>{
         if(res.data['amountToSend'] !== 0){
         props.setAmountReserved(res.data['amountReserved'])
         props.setAmountToSend(res.data['amountToSend'])
-        //props.setTimerTo(res.data['endOfReservationTime'])
         let d = new Date(res.data['endOfReservationTime'])
-        //setEndOfReservationTime(setDate)
-        //endOfReservationTime.setDate(res.data['endOfReservationTime'])
 
         const currentTime = new Date(Date.now());
-        //console.log(endOfReservationTime)
         var diffMs = (d - currentTime);
         props.setTimerTo(Math.floor(((diffMs % 86400000) % 3600000)))
-        if(res.data['txSubmitted'] === true){
+        props.setIsSoldOut(false)
+        console.log()
+        if(res.data['txSubmitted']){
           props.setAmountToSend(0)
         }
         }
-
       });
-    },[])
+    },[])*/
 
 
     const changeValue = (event, value) => {
@@ -38,7 +35,13 @@ export default function SliderWindow(props) {
 
     function sendOrder(amount){
       AmountService.sendOrder(amount, props.userStakeKey).then(res =>{
+        if(res.data['amountToSend'] === 0){
+          //props.setAmountToSend(res.data['amountToSend']);
+          props.setIsSoldOut(true)
+          //console.log("a")
+        }else{
         props.setAmountToSend(res.data['amountToSend']);
+        }
       });
 
     }

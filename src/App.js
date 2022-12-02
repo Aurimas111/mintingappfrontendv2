@@ -25,13 +25,32 @@ function App() {
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
   const [isSoldOut, setIsSoldOut] = React.useState(true)
 
-
+// is pradziu padarius rezervacija, kartais neteisingai rodo laika (keliom minutes atsilieka timeris)
 
   React.useEffect(() =>{
-    AmountService.getSoldOutProgress().then(res =>{
-      setIsSoldOut(res.data);
-    })
-  }, [])
+
+    AmountService.getActiveOrder(userStakeKey).then(res =>{
+
+      if(res.data['amountToSend'] !== 0){
+      if(res.data['txSubmitted']===true){
+        setAmountToSend(0)
+      }else{
+      setAmountReserved(res.data['amountReserved'])
+      setAmountToSend(res.data['amountToSend'])
+      let d = new Date(res.data['endOfReservationTime'])
+
+      const currentTime = new Date(Date.now());
+      var diffMs = (d - currentTime);
+      setTimerTo(Math.floor(((diffMs % 86400000) % 3600000)))
+      }
+      }else{
+          AmountService.getSoldOutProgress().then(res =>{
+            setIsSoldOut(res.data);
+          })
+      }
+    });
+
+  }, [userStakeKey])
 
 
   // Kai atlieka rezervacija visa svarbia informacija issaugoti i db
@@ -48,10 +67,11 @@ function App() {
       setTimerTo={setTimerTo}
       ></Header>
 
-      {isSoldOut && amountReserved === 0 ? <SoldOutWindow></SoldOutWindow> : ""}
-      {userStakeKey === null && !isSoldOut ? <ConnectWallet></ConnectWallet> : ""}
+      {isSoldOut && amountToSend === 0 ? <SoldOutWindow></SoldOutWindow> : ""}
+      {userStakeKey === null ? <ConnectWallet></ConnectWallet> : ""}
       
-      {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow setAmountToSend = {setAmountToSend}
+      {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow
+      setAmountToSend = {setAmountToSend}
       userStakeKey = {userStakeKey}
       setAmountReserved = {setAmountReserved}
       //setEndOfReservationTime = {setEndOfReservationTime}
@@ -59,6 +79,8 @@ function App() {
       timerStart = {timerStart}
       //isLoadingAmountToSend= {isLoadingAmountToSend}
       setIsLoadingAmountToSend = {setIsLoadingAmountToSend}
+      setIsSoldOut = {setIsSoldOut}
+      isSoldOut = {isSoldOut}
       //endOfReservationTime={endOfReservationTime}
       ></SliderWindow> : ""}
 
