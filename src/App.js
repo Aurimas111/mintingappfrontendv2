@@ -28,8 +28,9 @@ function App() {
 // is pradziu padarius rezervacija, kartais neteisingai rodo laika (keliom minutes atsilieka timeris)
 
   React.useEffect(() =>{
-
+    if(userStakeKey !== undefined && userStakeKey !== null){
     AmountService.getActiveOrder(userStakeKey).then(res =>{
+      
 
       if(res.data['amountToSend'] !== 0){
       if(res.data['txSubmitted']===true){
@@ -49,6 +50,7 @@ function App() {
           })
       }
     });
+  }
 
   }, [userStakeKey])
 
