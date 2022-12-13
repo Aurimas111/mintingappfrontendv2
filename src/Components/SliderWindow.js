@@ -14,7 +14,6 @@ export default function SliderWindow(props) {
       })
     },[])
 
-
     const changeValue = (event, value) => {
       setSliderValue(parseInt(event.target.value));
     };

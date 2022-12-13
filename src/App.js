@@ -23,14 +23,20 @@ function App() {
   const [enabledWallet, setEnabledWallet ] = React.useState(undefined)
   const [txSubmitted, setTxSubmitted] = React.useState(false)
   const [submittedTxHash, setSubmittedTxHash] = React.useState(undefined)
-  const [isSoldOut, setIsSoldOut] = React.useState(true)
+  const [isSoldOut, setIsSoldOut] = React.useState(false)
+  const [isWhitelisted, setIsWhitelisted] = React.useState(false)
+
+
+
 
 // is pradziu padarius rezervacija, kartais neteisingai rodo laika (keliom minutes atsilieka timeris)
+
 
   React.useEffect(() =>{
     if(userStakeKey !== undefined && userStakeKey !== null){
     AmountService.getActiveOrder(userStakeKey).then(res =>{
-      
+      setIsWhitelisted(res.data['whitelisted'])
+
 
       if(res.data['amountToSend'] !== 0){
       if(res.data['txSubmitted']===true){
@@ -72,7 +78,7 @@ function App() {
       {isSoldOut && amountToSend === 0 ? <SoldOutWindow></SoldOutWindow> : ""}
       {userStakeKey === null ? <ConnectWallet></ConnectWallet> : ""}
       
-      {amountToSend === 0 && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <SliderWindow
+      {amountToSend === 0 && !isSoldOut && isWhitelisted ? <SliderWindow
       setAmountToSend = {setAmountToSend}
       userStakeKey = {userStakeKey}
       setAmountReserved = {setAmountReserved}
@@ -86,13 +92,13 @@ function App() {
       //endOfReservationTime={endOfReservationTime}
       ></SliderWindow> : ""}
 
-      {amountToSend === 0 && !isSoldOut && userStakeKey !== "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <NotWhitelisted></NotWhitelisted> : ""}
+      {amountToSend === 0 && !isSoldOut && !isWhitelisted ? <NotWhitelisted></NotWhitelisted> : ""}
 
-      {isLoadingAmountToSend && !isSoldOut && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? (<div className='loader'>
+      {isLoadingAmountToSend && !isSoldOut && isWhitelisted ? (<div className='loader'>
             <PulseLoader color="#fff" size="16px" margin="4px" /></div>
       ) : ("")}
 
-      {amountToSend !== 0 && !isSoldOut && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" && !txSubmitted ? <PaymentWindow
+      {amountToSend !== 0 && !isSoldOut && !isLoadingAmountToSend && isWhitelisted && !txSubmitted ? <PaymentWindow
       amountToSend= {amountToSend}
       //endOfReservationTime={endOfReservationTime}
       timerTo={timerTo}
@@ -103,7 +109,7 @@ function App() {
       setSubmittedTxHash={setSubmittedTxHash}
       ></PaymentWindow> : ""}
 
-      {txSubmitted && !isSoldOut && amountToSend !== 0 && !isLoadingAmountToSend && userStakeKey === "stake_test1up6wxv43gw9gx39ya6rlm5re0cwfv8e99aqr6s22c09hzdsqux2kr" ? <TxSubmittedWindow
+      {txSubmitted && !isSoldOut && amountToSend !== 0 && !isLoadingAmountToSend && isWhitelisted ? <TxSubmittedWindow
       submittedTxHash={submittedTxHash}
       ></TxSubmittedWindow> : ""}
 
