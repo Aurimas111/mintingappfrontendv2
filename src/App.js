@@ -27,10 +27,7 @@ function App() {
   const [isWhitelisted, setIsWhitelisted] = React.useState(false)
 
 
-
-
 // is pradziu padarius rezervacija, kartais neteisingai rodo laika (keliom minutes atsilieka timeris)
-
 
   React.useEffect(() =>{
     if(userStakeKey !== undefined && userStakeKey !== null){
@@ -59,11 +56,6 @@ function App() {
   }
 
   }, [userStakeKey])
-
-
-  // Kai atlieka rezervacija visa svarbia informacija issaugoti i db
-  // jei vartotojas pekrauna puslapi su walletu kuris jau buvo padejes uzsakyma ir uzsakymas dar nera apmoketas
-  // uzkrauti ta uzsakyma
 
   return (
     <div className="App">
